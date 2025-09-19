@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
+#include <locale.h>
 
 #include "../GPMF_parser.h"
 #include "GPMF_mp4reader.h"
@@ -80,6 +81,9 @@ GPMF_ERR readMP4File(char* filename);
 int main(int argc, char* argv[])
 {
 	GPMF_ERR ret = GPMF_OK;
+
+	// Set UTF-8 locale voor correcte weergave van Unicode karakters
+	setlocale(LC_ALL, "C.UTF-8");
 
 	show_this_four_cc = SHOW_THIS_FOUR_CC;
 
@@ -241,7 +245,7 @@ GPMF_ERR readMP4File(char* filename)
 		{
 			if (frames)
 			{
-				printf("VIDEO FRAMERATE:\n  %.3f with %d frames\n", (float)fr_num / (float)fr_dem, frames);
+				printf("VIDEO FRAMERATE:\n  %g with %d frames\n", (float)fr_num / (float)fr_dem, frames);
 			}
 		}
 
@@ -278,7 +282,7 @@ GPMF_ERR readMP4File(char* filename)
 			if (show_payload_time && fuzzloopcount == 0)
 				if (show_gpmf_structure || show_payload_index || show_scaled_data)
 					if (show_all_payloads || index == 0)
-						printf("PAYLOAD TIME:\n  %.3f to %.3f seconds\n", in, out);
+						printf("PAYLOAD TIME:\n  %g to %g seconds\n", in, out);
 
 			if (show_gpmf_structure)
 			{
@@ -490,11 +494,11 @@ GPMF_ERR readMP4File(char* filename)
 											}
 											else if (type_samples == 0) //no TYPE structure
 											{
-												if (fuzzloopcount == 0) printf("%.3f%s, ", *ptr++, units[j % unit_samples]);
+												if (fuzzloopcount == 0) printf("%g%s, ", *ptr++, units[j % unit_samples]);
 											}
 											else if (complextype[j] != 'F')
 											{
-												if (fuzzloopcount == 0) printf("%.3f%s, ", *ptr++, units[j % unit_samples]);
+												if (fuzzloopcount == 0) printf("%g%s, ", *ptr++, units[j % unit_samples]);
 												pos += GPMF_SizeofType((GPMF_SampleType)complextype[j]);
 											}
 											else if (type_samples && complextype[j] == GPMF_TYPE_FOURCC)
