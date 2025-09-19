@@ -245,7 +245,7 @@ GPMF_ERR readMP4File(char* filename)
 		{
 			if (frames)
 			{
-				printf("VIDEO FRAMERATE:\n  %g with %d frames\n", (float)fr_num / (float)fr_dem, frames);
+				printf("VIDEO FRAMERATE:\n  %.10f with %d frames\n", (float)fr_num / (float)fr_dem, frames);
 			}
 		}
 
@@ -282,7 +282,7 @@ GPMF_ERR readMP4File(char* filename)
 			if (show_payload_time && fuzzloopcount == 0)
 				if (show_gpmf_structure || show_payload_index || show_scaled_data)
 					if (show_all_payloads || index == 0)
-						printf("PAYLOAD TIME:\n  %g to %g seconds\n", in, out);
+						printf("PAYLOAD TIME:\n  %.10f to %.10f seconds\n", in, out);
 
 			if (show_gpmf_structure)
 			{
@@ -494,11 +494,11 @@ GPMF_ERR readMP4File(char* filename)
 											}
 											else if (type_samples == 0) //no TYPE structure
 											{
-												if (fuzzloopcount == 0) printf("%g%s, ", *ptr++, units[j % unit_samples]);
+												if (fuzzloopcount == 0) printf("%.10f%s, ", *ptr++, units[j % unit_samples]);
 											}
 											else if (complextype[j] != 'F')
 											{
-												if (fuzzloopcount == 0) printf("%g%s, ", *ptr++, units[j % unit_samples]);
+												if (fuzzloopcount == 0) printf("%.10f%s, ", *ptr++, units[j % unit_samples]);
 												pos += GPMF_SizeofType((GPMF_SampleType)complextype[j]);
 											}
 											else if (type_samples && complextype[j] == GPMF_TYPE_FOURCC)

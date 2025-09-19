@@ -134,7 +134,7 @@ void printfData(uint32_t type, uint32_t structsize, uint32_t repeat, void *data)
 				{
 					Swap = BYTESWAP64(*L);
 					d = (double *)&Swap;
-					DBG_MSG("%g,", *d);
+					DBG_MSG("%.10f,", *d);
 					L++;
 				}
 				if (repeat) DBG_MSG(" ");
@@ -156,7 +156,7 @@ void printfData(uint32_t type, uint32_t structsize, uint32_t repeat, void *data)
 				{
 					Swap = BYTESWAP32(*L);
 					f = (float *)&Swap;
-					DBG_MSG("%g,", *f);
+					DBG_MSG("%.10f,", *f);
 					L++;
 				}
 				if (repeat) DBG_MSG(" ");
@@ -288,7 +288,7 @@ void printfData(uint32_t type, uint32_t structsize, uint32_t repeat, void *data)
 				{
 					double dq = BYTESWAP32(*q);
 					dq /= (double)65536.0;
-					DBG_MSG("%g,", dq);
+					DBG_MSG("%.10f,", dq);
 					q++;
 				}
 				if (repeat) DBG_MSG(" ");
@@ -310,7 +310,7 @@ void printfData(uint32_t type, uint32_t structsize, uint32_t repeat, void *data)
 					uint64_t Q64 = (uint64_t)BYTESWAP64(*Q);
 					double dq = (double)(Q64 >> (uint64_t)32);
 					dq += (double)(Q64 & (uint64_t)0xffffffff) / (double)0x100000000;
-					DBG_MSG("%g,", dq);
+					DBG_MSG("%.10f,", dq);
 					Q++;
 				}
 				if (repeat) DBG_MSG(" ");
